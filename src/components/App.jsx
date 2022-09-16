@@ -81,7 +81,7 @@ export const App = () => {
       {status === STATUS.REJECTED && <></>}
       {status === STATUS.RESOLVED && (
         <>
-          {page < Math.floor(total / PER_PAGE) && (
+          {page <= Math.floor(total / PER_PAGE) && (
             <Button onClick={handleClick} text="Load more"></Button>
           )}
           {selectedImage && (

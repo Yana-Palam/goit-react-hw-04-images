@@ -3,24 +3,25 @@ import PropTypes from 'prop-types';
 import { Overlay, ModalWrapper } from './Modal.styled';
 
 const Modal = ({ onCloseModal, src, name }) => {
+  const closeByEsc = e => {
+    if (e.code === 'Escape') {
+      onCloseModal();
+    }
+  };
+
   useEffect(() => {
-    const closeByEsc = e => {
-      if (e.code === 'Escape') {
-        onCloseModal();
-      }
-    };
     document.addEventListener('keydown', closeByEsc);
 
     return () => {
       document.removeEventListener('keydown', closeByEsc);
     };
-  }, []);
+  }, [closeByEsc]);
 
-  const closeByBackdrop = e => {
+  function closeByBackdrop(e) {
     if (e.currentTarget === e.target) {
       onCloseModal();
     }
-  };
+  }
 
   return (
     <Overlay onClick={closeByBackdrop}>

@@ -1,13 +1,16 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Overlay, ModalWrapper } from './Modal.styled';
 
 const Modal = ({ onCloseModal, src, name }) => {
-  const closeByEsc = e => {
-    if (e.code === 'Escape') {
-      onCloseModal();
-    }
-  };
+  const closeByEsc = useCallback(
+    e => {
+      if (e.code === 'Escape') {
+        onCloseModal();
+      }
+    },
+    [onCloseModal]
+  );
 
   useEffect(() => {
     document.addEventListener('keydown', closeByEsc);
